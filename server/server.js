@@ -33,7 +33,7 @@ app.get('/api/character/:id', function(req,res){
 } );
 
 app.get('/api/films/:id', function(req,res){
-    findFilm(req.params.id, 
+    findFilm(+req.params.id, 
         (film) => {
             if (!film){
                 res.status(404).end();
@@ -45,7 +45,7 @@ app.get('/api/films/:id', function(req,res){
 });
 
 app.get('/api/planets/:id', function(req,res){
-    findPlanet(req.data.id, 
+    findPlanet(+req.params.id, 
         (planet) => {
             if (!planet){
                 res.status(404).end();
@@ -57,7 +57,7 @@ app.get('/api/planets/:id', function(req,res){
 });
 
 app.get('/api/characters/:id', function(req,res){
-    findCharacter(req.params.id, 
+    findCharacter(+req.params.id, 
         (character) => {
             if (!character){
                 res.status(404).end();
