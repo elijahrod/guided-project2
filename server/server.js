@@ -1,5 +1,5 @@
 import express from "express"
-import { findAllPlanets, findAllCharacters, findAllFilms, findPlanet, findCharacter, findFilm } from './mongo-dao.js';
+import { findAllPlanets, findAllCharacters, findAllFilms, findPlanet, findCharacter, findFilm, findAllPlanetsfromFilm, findAllCharactersfromFilm } from './mongo-dao.js';
 
 
 const app = express();
@@ -69,22 +69,32 @@ app.get('/api/characters/:id', function(req,res){
 });
 
 app.get('/api/films/:id/planets', function(req,res){
-    findFilm(+req.params.id, 
-        (film) => {
-            if (!film){
+    findAllPlanetsfromFilm(+req.params.id, 
+        (planets) => {
+            if (!planets){
                 res.status(404).end();
             }
             else {
+<<<<<<< HEAD
 
                 res.send(film);
+=======
+                res.send(planets);
+>>>>>>> 42e2bff500d06016af6b740dce59a41394c4208c
             }
         })
 } );
 
-app.get('/api/characters/:id/films', function(req,res){
-    findAllFilms(function(data){
-        res.send(data)
-    })
+app.get('/api/films/:id/characters', function(req,res){
+    findAllCharactersfromFilm(+req.params.id, 
+        (characters) => {
+            if (!characters){
+                res.status(404).end();
+            }
+            else {
+                res.send(characters);
+            }
+        })
 } );
 
 app.get('/api/planets/:id/films', function(req,res){
