@@ -1,5 +1,5 @@
 import express from "express"
-import { findAllPlanets } from './mongo-dao.js';
+import { findAllPlanets, findAllCharacters, findAllFilms, findPlanet, findCharacter, findFilm } from './mongo-dao.js';
 
 
 const app = express();
