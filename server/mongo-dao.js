@@ -1,4 +1,4 @@
-import { mongodb, MongoClient} from "mongodb";
+import mongodb, { MongoClient} from "mongodb";
 
 const url = "mongodb://localhost:27017";
 const dbName = "swapi";
@@ -13,7 +13,8 @@ async function startup(){
 }
 startup();
 
-module.exports.findAllPlanets = function(callback){
-        textData = 'response from findAllPlanets'
-        callback(textData)
+export const findAllPlanets = function(callback){
+         let dataPromise = collection.find({}).toArray();
+         dataPromise.then((planets) => callback(planets));
+        
 }
