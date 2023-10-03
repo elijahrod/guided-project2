@@ -2,7 +2,6 @@ import mongodb, { MongoClient} from "mongodb";
 
 const url = "mongodb://localhost:27017";
 const dbName = "swapi";
-let collection;
 
 async function dbConnect(){
     let client = new MongoClient(url);
@@ -29,18 +28,21 @@ export const findAllFilms = async function(callback){
     dataPromise.then((films) => callback(films));
    
 }
-export const findPlanet = function(id, callback){
-    let dataPromise = collection.findOne({'id':id});
+export const findPlanet = async function(id, callback){
+    let db = await dbConnect();
+    let dataPromise = db.collection("planets").findOne({"id":id});
     dataPromise.then((planet) => callback(planet));
    
 }
-export const findCharacter = function(id, callback){
-    let dataPromise = collection.find({"id":id});
+export const findCharacter = async function(id, callback){
+    let db = await dbConnect();
+    let dataPromise = db.collection("characters").findOne({'id':id});
     dataPromise.then((character) => callback(character));
    
 }
-export const findFilm = function(id, callback){
-    let dataPromise = collection.find({"id":id});
+export const findFilm = async function(id, callback){
+    let db = await dbConnect();
+    let dataPromise = db.collection("films").findOne({'id':id});
     dataPromise.then((film) => callback(film));
    
 }
