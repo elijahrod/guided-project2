@@ -30,7 +30,7 @@ export const findAllFilms = async function(callback){
 }
 export const findPlanet = async function(id, callback){
     let db = await dbConnect();
-    let dataPromise = db.collection("planets").findOne({"id":id});
+    let dataPromise = db.collection("planets").findOne({'id':id});
     dataPromise.then((planet) => callback(planet));
    
 }
@@ -45,4 +45,10 @@ export const findFilm = async function(id, callback){
     let dataPromise = db.collection("films").findOne({'id':id});
     dataPromise.then((film) => callback(film));
    
+}
+
+export const findPlanetInFilm = async function (id, callback) {
+    let db = await dbConnect();
+    let dataPromise = db.collection("films").findOne({'id':id});
+    dataPromise.then((film) => callback(film));
 }

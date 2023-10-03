@@ -45,7 +45,7 @@ app.get('/api/films/:id', function(req,res){
 });
 
 app.get('/api/planets/:id', function(req,res){
-    findPlanet(+req.data.id, 
+    findPlanet(+req.params.id, 
         (planet) => {
             if (!planet){
                 res.status(404).end();
@@ -75,6 +75,7 @@ app.get('/api/films/:id/planets', function(req,res){
                 res.status(404).end();
             }
             else {
+
                 res.send(film);
             }
         })
