@@ -1,4 +1,10 @@
-import express from "express";
+import express from "express"
+
+const mongodb = reqire("mongodb");
+const { MongoClient } = require('mongodb');
+
+const url = "mongodb://localhost:27017";
+const dbName = "swapi";
 
 const app = express();
 const port = 2020;
