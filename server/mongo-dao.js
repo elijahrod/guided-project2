@@ -46,6 +46,7 @@ export const findFilm = async function(id, callback){
     dataPromise.then((film) => callback(film));
    
 }
+
 export const findAllPlanetsfromFilm = async function(id, callback){
     let db = await dbConnect();
     let dataPromise = db.collection("films_planets").find({'film_id': id}).toArray();
@@ -68,5 +69,5 @@ export const findAlCharactersfromPlanets = async function(id, callback){
     let dataPromise = db.collection("films_planets").find({'planet_id': id}).toArray();
     dataPromise.then((characters) => callback(characters));
 }
-//oogabooga
+
 
