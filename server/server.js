@@ -1,5 +1,5 @@
 import express from "express"
-import { findAllPlanets, findAllCharacters, findAllFilms, findPlanet, findCharacter, findFilm, findAllPlanetsfromFilm, findAllCharactersfromFilm } from './mongo-dao.js';
+import { findAllPlanets, findAllCharacters, findAllFilms, findPlanet, findCharacter, findFilm, findAllPlanetsfromFilm, findAllCharactersfromFilm, findAllFilmsfromPlanets } from './mongo-dao.js';
 
 
 const app = express();
@@ -7,12 +7,6 @@ const app = express();
 const port = 2020;
 console.log(`Server is running on port ${port}`)
 app.use(express.json())
-
-app.get('/api/planets', function(req,res){
-    findAllPlanets(function(data){
-        res.send(data)
-    })
-} );
 
 app.get('/api/characters', function(req,res){
     findAllCharacters(function(data){
@@ -26,11 +20,23 @@ app.get('/api/films', function(req,res){
     })
 } );
 
-app.get('/api/character/:id', function(req,res){
-    findCharacter(function(data){
+app.get('/api/planets', function(req,res){
+    findAllPlanets(function(data){
         res.send(data)
     })
 } );
+
+app.get('/api/characters/:id', function(req,res){
+    findCharacter(+req.params.id, 
+        (character) => {
+            if (!character){
+                res.status(404).end();
+            }
+            else {
+                res.send(character);
+            }
+        })
+});
 
 app.get('/api/films/:id', function(req,res){
     findFilm(+req.params.id, 
@@ -56,17 +62,17 @@ app.get('/api/planets/:id', function(req,res){
         })
 });
 
-app.get('/api/characters/:id', function(req,res){
-    findCharacter(+req.params.id, 
-        (character) => {
-            if (!character){
+app.get('/api/films/:id/characters', function(req,res){
+    findAllCharactersfromFilm(+req.params.id, 
+        (characters) => {
+            if (!characters){
                 res.status(404).end();
             }
             else {
-                res.send(character);
+                res.send(characters);
             }
         })
-});
+} );
 
 app.get('/api/films/:id/planets', function(req,res){
     findAllPlanetsfromFilm(+req.params.id, 
@@ -80,8 +86,8 @@ app.get('/api/films/:id/planets', function(req,res){
         })
 } );
 
-app.get('/api/films/:id/characters', function(req,res){
-    findAllCharactersfromFilm(+req.params.id, 
+app.get('/api/characters/:id/films', function(req,res){
+    findAllFilmsfromCharacter(+req.params.id, //import this
         (characters) => {
             if (!characters){
                 res.status(404).end();
@@ -93,15 +99,27 @@ app.get('/api/films/:id/characters', function(req,res){
 } );
 
 app.get('/api/planets/:id/films', function(req,res){
-    findAllFilms(function(data){
-        res.send(data)
-    })
+    findAllFilmsfromPlanets(+req.params.id, //import this
+        (characters) => {
+            if (!characters){
+                res.status(404).end();
+            }
+            else {
+                res.send(characters);
+            }
+        })
 } );
 
 app.get('/api/planets/:id/characters', function(req,res){
-    findAllFilms(function(data){
-        res.send(data)
-    })
+    findAllCharactersfromPlanets(+req.params.id, //import this
+        (characters) => {
+            if (!characters){
+                res.status(404).end();
+            }
+            else {
+                res.send(characters);
+            }
+        })
 } );
 
 app.listen(port);

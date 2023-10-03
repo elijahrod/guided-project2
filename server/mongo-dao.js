@@ -63,12 +63,10 @@ export const findAllFilmsfromCharacter = async function(id, callback){
     let dataPromise = db.collection("films_characters").find({'character_id': id}).toArray();
     dataPromise.then((characters) => callback(characters));
 }
-export const findAllFilmsfromPlanets = async function(id, callback){
+export const findAlCharactersfromPlanets = async function(id, callback){
     let db = await dbConnect();
     let dataPromise = db.collection("films_planets").find({'planet_id': id}).toArray();
     dataPromise.then((characters) => callback(characters));
 }
 
-//export const findAllCharactersfromPlanets = async function(id, callback){
-    
-//}
+
