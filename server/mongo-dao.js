@@ -46,14 +46,7 @@ export const findFilm = async function(id, callback){
     dataPromise.then((film) => callback(film));
    
 }
-<<<<<<< HEAD
 
-export const findPlanetInFilm = async function (id, callback) {
-    let db = await dbConnect();
-    let dataPromise = db.collection("films").findOne({'id':id});
-    dataPromise.then((film) => callback(film));
-}
-=======
 export const findAllPlanetsfromFilm = async function(id, callback){
     let db = await dbConnect();
     let dataPromise = db.collection("films_planets").find({'film_id': id}).toArray();
@@ -71,13 +64,17 @@ export const findAllFilmsfromCharacter = async function(id, callback){
     let dataPromise = db.collection("films_characters").find({'character_id': id}).toArray();
     dataPromise.then((characters) => callback(characters));
 }
-export const findAllFilmsfromPlanets = async function(id, callback){
+export const findAlCharactersfromPlanets = async function(id, callback){
     let db = await dbConnect();
     let dataPromise = db.collection("films_planets").find({'planet_id': id}).toArray();
     dataPromise.then((characters) => callback(characters));
 }
 
+<<<<<<< HEAD
 //export const findAllCharactersfromPlanets = async function(id, callback){
     
 //}
 >>>>>>> 42e2bff500d06016af6b740dce59a41394c4208c
+=======
+
+>>>>>>> 49fd978a5d677325379c5d6543eda95e30066ccc
