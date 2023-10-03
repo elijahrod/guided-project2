@@ -81,12 +81,7 @@ app.get('/api/films/:id/planets', function(req,res){
                 res.status(404).end();
             }
             else {
-<<<<<<< HEAD
-
-                res.send(film);
-=======
                 res.send(planets);
->>>>>>> 42e2bff500d06016af6b740dce59a41394c4208c
             }
         })
 } );
