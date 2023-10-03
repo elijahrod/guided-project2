@@ -33,10 +33,16 @@ app.get('/api/character/:id', function(req,res){
 } );
 
 app.get('/api/films/:id', function(req,res){
-    findFilm(function(data){
-        res.send(data)
-    })
-} );
+    findFilm(req.params.id, 
+        (film) => {
+            if (!film){
+                res.status(404).end();
+            }
+            else {
+                res.send(film);
+            }
+        })
+});
 
 app.get('/api/planets/:id', function(req,res){
     findPlanet(req.data.id, 
@@ -50,11 +56,17 @@ app.get('/api/planets/:id', function(req,res){
         })
 });
 
-app.get('/api/films/:id/characters', function(req,res){
-    findAllFilms(function(data){
-        res.send(data)
-    })
-} );
+app.get('/api/characters/:id', function(req,res){
+    findCharacter(req.params.id, 
+        (character) => {
+            if (!character){
+                res.status(404).end();
+            }
+            else {
+                res.send(character);
+            }
+        })
+});
 
 app.get('/api/films/:id/planets', function(req,res){
     findAllFilms(function(data){
