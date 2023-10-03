@@ -69,9 +69,15 @@ app.get('/api/characters/:id', function(req,res){
 });
 
 app.get('/api/films/:id/planets', function(req,res){
-    findAllFilms(function(data){
-        res.send(data)
-    })
+    findFilm(+req.params.id, 
+        (film) => {
+            if (!film){
+                res.status(404).end();
+            }
+            else {
+                res.send(film);
+            }
+        })
 } );
 
 app.get('/api/characters/:id/films', function(req,res){

@@ -37,7 +37,6 @@ export const findPlanet = async function(id, callback){
 export const findCharacter = async function(id, callback){
     let db = await dbConnect();
     let dataPromise = db.collection("characters").findOne({'id':id});
-    console.log("hello..")
     dataPromise.then((character) => callback(character));
    
 }
