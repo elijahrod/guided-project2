@@ -33,13 +33,13 @@ app.get('/api/character/:id', function(req,res){
 } );
 
 app.get('/api/films/:id', function(req,res){
-    findFilms(function(data){
+    findFilm(function(data){
         res.send(data)
     })
 } );
 
 app.get('/api/planets/:id', function(req,res){
-    findPlanets(function(data){
+    findPlanet(function(data){
         res.send(data)
     })
 } );

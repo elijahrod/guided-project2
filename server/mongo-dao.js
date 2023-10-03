@@ -28,3 +28,18 @@ export const findAllFilms = function(callback){
     dataPromise.then((films) => callback(films));
    
 }
+export const findPlanet = function(callback){
+    let dataPromise = collection.findOne({"id":id}).toArray();
+    dataPromise.then((planet) => callback(planet));
+   
+}
+export const findCharacter = function(callback){
+    let dataPromise = collection.find({"id":id}).toArray();
+    dataPromise.then((character) => callback(character));
+   
+}
+export const findFilm = function(callback){
+    let dataPromise = collection.find({"id":id}).toArray();
+    dataPromise.then((film) => callback(film));
+   
+}
