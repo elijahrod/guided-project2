@@ -54,7 +54,22 @@ export const findPlanet = async function(id, callback){
 
 export const findAllCharactersfromFilm = async function(id, callback){
     let db = await dbConnect();
-    let dataPromise = db.collection("films_characters").find({'film_id': id}).toArray();
+    let charactersAndFilm = db.collection("films_characters");//.find({'film_id': id});
+    let dataPromise = charactersAndFilm.aggregate([
+        {
+            $match:{
+                "film_id": +id
+            }
+        },
+        {
+            $lookup:{
+                from: 'characters',
+                localField: 'character_id',
+                foreignField: 'id',
+                as: 'charachtersFromFilm'
+            }
+        },
+    ]).toArray();
     dataPromise.then((characters) => callback(characters));
 }
 
