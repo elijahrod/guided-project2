@@ -1,12 +1,13 @@
-import express from "express"
+import express from "express";
 import { findAllPlanets, findAllCharacters, findAllFilms, findPlanet, findCharacter, findFilm, findAllPlanetsfromFilm, findAllCharactersfromFilm, findAllFilmsfromPlanets } from './mongo-dao.js';
-
+import cors from 'cors';
 
 const app = express();
 
 const port = 2020;
 console.log(`Server is running on port ${port}`)
 app.use(express.json())
+app.use(cors())
 
 app.get('/api/characters', function(req,res){
     findAllCharacters(function(data){
